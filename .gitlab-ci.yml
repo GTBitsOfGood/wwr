@@ -1,0 +1,17 @@
+stages:
+  - prod-deploy
+
+prod-deploy:
+  stage: prod-deploy
+  only:
+    - master
+  script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh-keygen -R worldwaterrelief.org
+    - ssh-keygen -R 66.147.242.84
+    - ssh-keygen -R worldwaterrelief.org,66.147.242.84
+    - ssh-keyscan -H worldwaterrelief.org,66.147.242.84 >> ~/.ssh/known_hosts
+    - ssh-keyscan -H 66.147.242.84 >> ~/.ssh/known_hosts
+    - ssh-keyscan -H worldwaterrelief.org >> ~/.ssh/known_hosts
+    - ssh worldwa9@worldwaterrelief.org "cd ~/www/wp-content/themes/wwr && git pull origin master"
