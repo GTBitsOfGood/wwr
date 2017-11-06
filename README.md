@@ -1,3 +1,4 @@
+Open wordpress.zip to view the new local files.
 ====================== Licenses ======================
 Unless otherwise specified, all the theme files, scripts and images
 are licensed under GPLv2
